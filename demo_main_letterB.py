@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.io as sio
 
-from phase_retrieval_GS2 import Ger_Sax_algo2
+from phase_retrieval_GS2 import gerSaxAlgo2
 
 # imgNear = cv2.imread("A_Near.png", cv2.IMREAD_GRAYSCALE)
 # imgNear = imgNear.astype(float)
@@ -15,7 +15,7 @@ imgFar = imgFar.astype(float)
 imgFar = np.asarray(imgFar, float)
 
 max_iters = 2000
-phase_far, phase_near = Ger_Sax_algo2(imgFar, max_iters)
+phase_far, phase_near = gerSaxAlgo2(imgFar, max_iters)
 
 original = np.exp(phase_near * 1j)
 recovery = np.fft.fft2(original)

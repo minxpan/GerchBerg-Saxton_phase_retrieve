@@ -17,7 +17,7 @@ classdef HelperClass
 
         end
 
-        function quantizedPhase = quantizePhase(Array)
+        function quantizedPhase = quantizePhase4(Array)
 
             [M, N] = size(Array);
             quantized = [-pi, -pi / 2, 0, pi / 2, pi]; % four level quantization
@@ -35,6 +35,45 @@ classdef HelperClass
 
             quantizedPhase = Array;
         end
+        
+        function quantizedPhase = quantizePhase3(Array)
+
+            [M, N] = size(Array);
+            quantized = [-2*pi/3 0 2*pi/3]; % four level quantization
+            % quantized = [-pi,-3*pi / 4 -pi / 2, -pi / 4, 0, pi / 4, pi / 2,3*pi / 4 pi]; % eight level quantization
+
+            for ii = 1:M
+
+                for jj = 1:N
+                    [~, idx] = min(abs(quantized - Array(ii, jj)));
+                    Array(ii, jj) = quantized(idx);
+
+                end
+
+            end
+
+            quantizedPhase = Array;
+        end
+        
+        function quantizedPhase = quantizePhase2(Array)
+
+            [M, N] = size(Array);
+            quantized = [0, pi]; % two level quantization
+            % quantized = [-pi,-3*pi / 4 -pi / 2, -pi / 4, 0, pi / 4, pi / 2,3*pi / 4 pi]; % eight level quantization
+
+            for ii = 1:M
+
+                for jj = 1:N
+                    [~, idx] = min(abs(quantized - Array(ii, jj)));
+                    Array(ii, jj) = quantized(idx);
+
+                end
+
+            end
+
+            quantizedPhase = Array;
+        end
+        
 
         function BinarizedArray = Binarize(Array)
 
